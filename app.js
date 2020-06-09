@@ -13,8 +13,6 @@
  * 7. Clicking on a book in the "Read Books" table should "star" it. Starred
  *    books should appear with a yellow background. This can be applied by
  *    adding the `starred` class to the table row (`<tr>`) for each starred book
- * 8. **STRETCH GOAL** When a book is starred, send a POST request to the
- *    account.starUrl
  */
 
 /**
@@ -22,10 +20,8 @@
  *
  * Do not edit this code.
  */
-var account = {
+let account = {
   accountEmail: "example@codeyourfuture.io",
-  booksUrl: "/data/books.json",
-  starUrl: "/star",
   unreadBooks: [],
   readBooks: []
 };
@@ -38,23 +34,11 @@ var account = {
  *
  * You may edit this code.
  */
-var loadButton = document.querySelector("#loadButton");
+let loadButton = document.querySelector("#loadButton");
 
-/**
- * Complete the fetchBooks function so that it calls the fetch function. The
- * account.booksUrl variable should be passed as the first parameter:
- *
- * fetch(account.booksUrl)
- *
- * When the request promise resolves, convert the response to JSON using the
- * json method:
- *
- * .then(response => response.json())
- *
- * Then call a function named processBooks and pass the JSON to it.
- */
 function fetchBooks() {
-  // Add your implementation here
+  const books = loadBooks();
+  processBooks(books);
 }
 
 /**
@@ -69,7 +53,7 @@ function fetchBooks() {
  * Then assign the account.unreadBooks variable to the unreadBooks array you
  * just created.
  *
- * Finally the call the render function and pass the account object to it.
+ * Finally call the render function and pass the account object to it.
  */
 
 // Write your processBooks function here
@@ -85,7 +69,7 @@ function fetchBooks() {
  * as an example.
  */
 function render(account) {
-  var accountEmailNode = document.createTextNode(account.accountEmail);
+  let accountEmailNode = document.createTextNode(account.accountEmail);
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
 
   // Add your implementation here
@@ -99,3 +83,78 @@ function render(account) {
  * For example, you might want to have functions that find unread/read books,
  * send fetch requests and more.
  */
+
+function loadBooks() {
+  return [
+    {
+      id: 1,
+      title: "The Catcher in the Rye",
+      author: "J. D. Salinger",
+      publishDate: "1951-07-16",
+      isRead: false
+    },
+    {
+      id: 2,
+      title: "To Kill a Mockingbird",
+      author: "Harper Lee",
+      publishDate: "1960-07-11",
+      isRead: true
+    },
+    {
+      id: 3,
+      title: "The Grapes of Wrath",
+      author: "John Steinbeck",
+      publishDate: "1939-04-14",
+      isRead: true
+    },
+    {
+      id: 4,
+      title: "The Great Gatsby",
+      author: "F Scott Fitzgerald",
+      publishDate: "1925-04-10",
+      isRead: true
+    },
+    {
+      id: 5,
+      title: "Moby-Dick",
+      author: "Herman Melville",
+      publishDate: "1851-10-18",
+      isRead: false
+    },
+    {
+      id: 6,
+      title: "Adventures of Huckleberry Finn",
+      author: "Mark Twain",
+      publishDate: "1884-12-10",
+      isRead: false
+    },
+    {
+      id: 7,
+      title: "Alice's Adventures in Wonderland",
+      author: "Lewis Carroll",
+      publishDate: "1865-11-26",
+      isRead: false
+    },
+    {
+      id: 8,
+      title: "Pride and Prejudice",
+      author: "Jane Austen",
+      publishDate: "1813-01-28",
+      isRead: false
+    },
+    {
+      id: 9,
+      title: "To the Lighthouse",
+      author: "Virginia Woolf",
+      publishDate: "1927-05-05",
+      isRead: false
+    },
+    {
+      id: 10,
+      title: "Nineteen Eighty-Four",
+      author: "George Orwell",
+      publishDate: "1949-06-08",
+      isRead: false
+    }
+  ];
+}
