@@ -57,7 +57,7 @@ function fetchBooks() {
  */
 
 // Write your processBooks function here
-
+function processBooks(allBooks){}
 /**
  * Complete the render function that updates the DOM with the account details.
  *
