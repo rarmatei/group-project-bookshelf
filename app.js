@@ -57,7 +57,11 @@ function fetchBooks() {
  */
 
 // Write your processBooks function here
-function processBooks(allBooks){}
+function processBooks(allBooks){
+
+  return console.log("text to be deleted later");
+  
+}
 /**
  * Complete the render function that updates the DOM with the account details.
  *
