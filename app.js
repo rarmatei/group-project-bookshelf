@@ -57,7 +57,19 @@ function fetchBooks() {
  */
 
 // Write your processBooks function here
-function processBooks(allBooks){}
+function processBooks(allBooks){
+
+  let unReadbooks = allBooks.filter(isReadBooks);
+  account.unreadBooks = unReadbooks;
+  render(account);
+  }
+  function isReadBooks(book){
+    if (book.isRead === false){
+    return true; 
+    } else {
+      return false;
+    }
+  }
 /**
  * Complete the render function that updates the DOM with the account details.
  *
