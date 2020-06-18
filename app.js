@@ -35,6 +35,7 @@ let account = {
  * You may edit this code.
  */
 let loadButton = document.querySelector("#loadButton");
+    loadButton.addEventListener("click",fetchBooks);
 
 function fetchBooks() {
   const books = loadBooks();
@@ -85,7 +86,13 @@ function render(account) {
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
 
   // Add your implementation here
+ // * 4. Show the current number of unread books in the Unread Books Count
+ 
+let unReadBooksNumber = document.querySelector("#unreadCount");
+    unReadBooksNumber.innerText = account.unreadBooks.length;
 }
+x
+
 
 /**
  * Write any additional functions that you need to complete the group project
