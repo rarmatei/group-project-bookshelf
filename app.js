@@ -35,6 +35,7 @@ let account = {
  * You may edit this code.
  */
 let loadButton = document.querySelector("#loadButton");
+loadButton.addEventListener("click",fetchBooks);
 
 function fetchBooks() {
   const books = loadBooks();
