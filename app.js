@@ -34,13 +34,15 @@ document.querySelector("#loadButton").addEventListener("click", fetchBooks);
  *
  * You may edit this code.
  */
+
 let books;
+let loadButton = document.querySelector("#loadButton");
+    loadButton.addEventListener("click",fetchBooks);
 
 function fetchBooks() {
   books = loadBooks();
   processBooks(books);
   render(account);
-  
 }
 
 /**
@@ -115,6 +117,11 @@ tr.appendChild(publishDate);
 let countRead = account.readBooks.length;
 document.querySelector("#readCount").textContent = countRead;
 
+  // Add your implementation here
+ // * 4. Show the current number of unread books in the Unread Books Count
+ 
+let unReadBooksNumber = document.querySelector("#unreadCount");
+    unReadBooksNumber.innerText = account.unreadBooks.length;
 }
 
 /**
