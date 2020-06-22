@@ -8,7 +8,7 @@
  *    title, author and publish date should be shown.
  * 4. Show the current number of unread books in the Unread Books Count
  * 5. Also filter the books data to find books that are marked as read
- * 6. Show the list of read books in the "Read Books" table and show the number
+ *+ 6. Show the list of read books in the "Read Books" table and show the number
  *    of read books in the Read Books Count
  * 7. Clicking on a book in the "Read Books" table should "star" it. Starred
  *    books should appear with a yellow background. This can be applied by
@@ -25,7 +25,7 @@ let account = {
   unreadBooks: [],
   readBooks: []
 };
-
+document.querySelector("#loadButton").addEventListener("click", fetchBooks);
 /**
  * Add an event listener that will call the fetchBooks function when the
  * loadButton is clicked.
@@ -34,11 +34,13 @@ let account = {
  *
  * You may edit this code.
  */
-let loadButton = document.querySelector("#loadButton");
+let books;
 
 function fetchBooks() {
-  const books = loadBooks();
+  books = loadBooks();
   processBooks(books);
+  render(account);
+  
 }
 
 /**
@@ -58,12 +60,21 @@ function fetchBooks() {
 
 // Write your processBooks function here
 function processBooks(allBooks){
-  let unReadbooks = allBooks.filter(isReadBooks);
-  account.unreadBooks = unReadbooks;
-  render(account);
+  let unReadBooks = allBooks.filter(isUnReadBooks);
+  let readBooks = allBooks.filter(isReadBooks);
+  account.unreadBooks = unReadBooks;
+  account.readBooks = readBooks;
+  
+  }
+  function isUnReadBooks(book){
+    if (book.isRead === false){
+    return true; 
+    } else {
+      return false;
+    }
   }
   function isReadBooks(book){
-    if (book.isRead === false){
+    if (book.isRead === true){
     return true; 
     } else {
       return false;
@@ -81,10 +92,29 @@ function processBooks(allBooks){
  * as an example.
  */
 function render(account) {
+  document.querySelector("#accountEmail").innerHTML="";
   let accountEmailNode = document.createTextNode(account.accountEmail);
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
+  readBooksCountList();
+}
+function readBooksCountList(){
+account.readBooks.forEach(element => {
+  let tr = document.createElement("tr");
+ readBooksList = document.querySelector("#readBooksList");
+ readBooksList.appendChild(tr);
+ let title = document.createElement("td")
+ title.textContent = element.title;
+tr.appendChild(title);
+ let author = document.createElement("td");
+ author.textContent = element.author;
+tr.appendChild(author);
+ let publishDate = document.createElement("td");
+ publishDate.textContent = element.publishDate;
+tr.appendChild(publishDate);
+});
+let countRead = account.readBooks.length;
+document.querySelector("#readCount").textContent = countRead;
 
-  // Add your implementation here
 }
 
 /**
