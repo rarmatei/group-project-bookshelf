@@ -16,11 +16,6 @@
  */
 
 
- 
-
-
-
-
 
 /**
  * This is the account details that you will use with this exercise.
@@ -50,6 +45,7 @@ function fetchBooks() {
   books = loadBooks();
   processBooks(books);
   render(account);
+  lastFun();
 }
 
 /**
@@ -99,11 +95,28 @@ function render(account) {
 }
 
 
+function lastFun(){
+let table = document.querySelectorAll(".testEmptyClassName");
+
+for (i=0; i < table.length; i++){
+
+  let myRow = table[i];
+      myRow.addEventListener("click",function(){
+      myRow.className="starred";
+  });
+}
+
+}
+
+
 function readBooksCountList(){
 account.readBooks.forEach(element => {
   let tr = document.createElement("tr");
  readBooksList = document.querySelector("#readBooksList");
  readBooksList.appendChild(tr);
+
+tr.className = "testEmptyClassName";
+
  let title = document.createElement("td")
  title.textContent = element.title;
 tr.appendChild(title);
@@ -113,8 +126,8 @@ tr.appendChild(author);
  let publishDate = document.createElement("td");
  publishDate.textContent = element.publishDate;
 tr.appendChild(publishDate);
-});
 
+});
 
 let countRead = account.readBooks.length;
 document.querySelector("#readCount").textContent = countRead;
