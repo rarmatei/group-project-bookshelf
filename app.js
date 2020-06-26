@@ -15,6 +15,13 @@
  *    adding the `starred` class to the table row (`<tr>`) for each starred book
  */
 
+
+ 
+
+
+
+
+
 /**
  * This is the account details that you will use with this exercise.
  *
@@ -25,7 +32,7 @@ let account = {
   unreadBooks: [],
   readBooks: []
 };
-document.querySelector("#loadButton").addEventListener("click", fetchBooks);
+
 /**
  * Add an event listener that will call the fetchBooks function when the
  * loadButton is clicked.
@@ -66,21 +73,12 @@ function processBooks(allBooks){
   let readBooks = allBooks.filter(isReadBooks);
   account.unreadBooks = unReadBooks;
   account.readBooks = readBooks;
-  
   }
   function isUnReadBooks(book){
-    if (book.isRead === false){
-    return true; 
-    } else {
-      return false;
-    }
+    return book.isRead === false;
   }
   function isReadBooks(book){
-    if (book.isRead === true){
-    return true; 
-    } else {
-      return false;
-    }
+    return book.isRead === true;
   }
 
 /**
@@ -99,6 +97,8 @@ function render(account) {
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
   readBooksCountList();
 }
+
+
 function readBooksCountList(){
 account.readBooks.forEach(element => {
   let tr = document.createElement("tr");
@@ -114,14 +114,15 @@ tr.appendChild(author);
  publishDate.textContent = element.publishDate;
 tr.appendChild(publishDate);
 });
+
+
 let countRead = account.readBooks.length;
 document.querySelector("#readCount").textContent = countRead;
 
   // Add your implementation here
  // * 4. Show the current number of unread books in the Unread Books Count
  
-let unReadBooksNumber = document.querySelector("#unreadCount");
-    unReadBooksNumber.innerText = account.unreadBooks.length;
+document.querySelector("#unreadCount").innerText = account.unreadBooks.length;
 }
 
 /**
