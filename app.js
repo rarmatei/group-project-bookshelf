@@ -8,12 +8,14 @@
  *    title, author and publish date should be shown.
  * 4. Show the current number of unread books in the Unread Books Count
  * 5. Also filter the books data to find books that are marked as read
- * 6. Show the list of read books in the "Read Books" table and show the number
+ *+ 6. Show the list of read books in the "Read Books" table and show the number
  *    of read books in the Read Books Count
  * 7. Clicking on a book in the "Read Books" table should "star" it. Starred
  *    books should appear with a yellow background. This can be applied by
  *    adding the `starred` class to the table row (`<tr>`) for each starred book
  */
+
+
 
 /**
  * This is the account details that you will use with this exercise.
@@ -34,11 +36,16 @@ let account = {
  *
  * You may edit this code.
  */
+
+let books;
 let loadButton = document.querySelector("#loadButton");
+    loadButton.addEventListener("click",fetchBooks);
 
 function fetchBooks() {
-  const books = loadBooks();
+  books = loadBooks();
   processBooks(books);
+  render(account);
+  lastFun();
 }
 
 /**
@@ -57,6 +64,18 @@ function fetchBooks() {
  */
 
 // Write your processBooks function here
+function processBooks(allBooks){
+  let unReadBooks = allBooks.filter(isUnReadBooks);
+  let readBooks = allBooks.filter(isReadBooks);
+  account.unreadBooks = unReadBooks;
+  account.readBooks = readBooks;
+  }
+  function isUnReadBooks(book){
+    return book.isRead === false;
+  }
+  function isReadBooks(book){
+    return book.isRead === true;
+  }
 
 /**
  * Complete the render function that updates the DOM with the account details.
@@ -69,10 +88,54 @@ function fetchBooks() {
  * as an example.
  */
 function render(account) {
+  document.querySelector("#accountEmail").innerHTML="";
   let accountEmailNode = document.createTextNode(account.accountEmail);
   document.querySelector("#accountEmail").appendChild(accountEmailNode);
+  readBooksCountList();
+}
+
+
+function lastFun(){
+let table = document.querySelectorAll(".testEmptyClassName");
+
+for (i=0; i < table.length; i++){
+
+  let myRow = table[i];
+      myRow.addEventListener("click",function(){
+      myRow.className="starred";
+  });
+}
+
+}
+
+
+function readBooksCountList(){
+account.readBooks.forEach(element => {
+  let tr = document.createElement("tr");
+ readBooksList = document.querySelector("#readBooksList");
+ readBooksList.appendChild(tr);
+
+tr.className = "testEmptyClassName";
+
+ let title = document.createElement("td")
+ title.textContent = element.title;
+tr.appendChild(title);
+ let author = document.createElement("td");
+ author.textContent = element.author;
+tr.appendChild(author);
+ let publishDate = document.createElement("td");
+ publishDate.textContent = element.publishDate;
+tr.appendChild(publishDate);
+
+});
+
+let countRead = account.readBooks.length;
+document.querySelector("#readCount").textContent = countRead;
 
   // Add your implementation here
+ // * 4. Show the current number of unread books in the Unread Books Count
+ 
+document.querySelector("#unreadCount").innerText = account.unreadBooks.length;
 }
 
 /**
